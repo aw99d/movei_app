@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -95,12 +94,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
             focusNode: widget.focusNode,
             readOnly: widget.readOnly,
             style: getMediumStyle(
-              color: ColorManager.black,
+              color: ColorManager.white,
             ).copyWith(fontSize: FontSize.s18),
             obscureText: hidden,
             keyboardType: widget.textInputType,
             obscuringCharacter: '*',
-            cursorColor: widget.cursorColor ?? ColorManager.black,
+            cursorColor: widget.cursorColor ?? ColorManager.white,
             onTap: widget.onTap,
             onEditingComplete: () {
               widget.focusNode?.unfocus();
@@ -122,7 +121,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(Insets.s12.sp),
               hintText: widget.hint,
-              prefixIcon: widget.prefixIcon,
+              prefixIcon: widget.prefixIcon != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: widget.prefixIcon,
+                    )
+                  : null,
               suffixIcon: widget.isObscured
                   ? IconButton(
                       onPressed: () => setState(() => hidden = !hidden),

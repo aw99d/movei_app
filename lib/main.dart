@@ -17,7 +17,7 @@ class MobiesApp extends StatelessWidget {
       designSize: const Size(430, 932),
       splitScreenMode: true,
       minTextAdapt: true,
-      builder: (_,_) => MaterialApp(
+      builder: (_,__) => MaterialApp(
         debugShowCheckedModeBanner: false,
        onGenerateRoute: RouteGenerator.getRoute,
         initialRoute: Routes.login,

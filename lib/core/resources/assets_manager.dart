@@ -1,5 +1,5 @@
 class ImageAssets {
-  static const String _imagePath = 'assets/images';
+  static const String _imagePath = 'assets/image';
   static const String avatar_1 = '$_imagePath/avatar_1.png';
   static const String avatar_2 = '$_imagePath/avatar_2.png';
   static const String avatar_3 = '$_imagePath/avatar_3.png';
@@ -24,6 +24,7 @@ class SvgAssets {
   static const String password  = '$_svgPath/password.svg';
   static const String phone  = '$_svgPath/phone.svg';
   static const String user  = '$_svgPath/user.svg';
+  static const String google  = '$_svgPath/google.svg';
   static const String visibilityOff = '$_svgPath/visibility_off.svg';
 }
 
