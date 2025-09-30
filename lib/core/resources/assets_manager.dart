@@ -11,6 +11,12 @@ class ImageAssets {
   static const String avatar_9 = '$_imagePath/avatar_9.png';
   static const String forgerpassword = '$_imagePath/forgotpasswordbro1.png';
   static const String logo = '$_imagePath/logo2.png';
+  static const String card = '$_imagePath/card.png';
+  static const String logo_home = '$_imagePath/logo_home.png';
+  static const String home_1 = '$_imagePath/home_1.png';
+  static const String home_2 = '$_imagePath/home_2.png';
+  static const String home_3 = '$_imagePath/home_3.png';
+  static const String home_4 = '$_imagePath/home_4.png';
 
 
 }

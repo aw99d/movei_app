@@ -162,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     prefixIcon: SvgPicture.asset(SvgAssets.google),
                     label: 'Login With Google',
                     onTap: () {
-                      
+                      Navigator.of(context).pushReplacementNamed(Routes.home);
                           
                     },
                   ),
