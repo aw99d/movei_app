@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movei_app/core/routes/routes.dart';
 import 'package:movei_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:movei_app/features/auth/presentation/screens/register_screen.dart';
+import 'package:movei_app/features/auth/presentation/screens/reset_password_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -10,6 +11,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => RegisterScreen());
       case Routes.login:
         return MaterialPageRoute(builder: (_) => LoginScreen());
+        case Routes.resetPassword:
+        return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
 
       default:
         return _undefinedRoute();
