@@ -17,7 +17,13 @@ class ImageAssets {
   static const String home_2 = '$_imagePath/home_2.png';
   static const String home_3 = '$_imagePath/home_3.png';
   static const String home_4 = '$_imagePath/home_4.png';
-
+  static const String home_5 = '$_imagePath/home_5.png';
+  static const String shodw = '$_imagePath/shodw.png';
+  static const String play = '$_imagePath/play.png';
+  static const String largescreenshot1 = '$_imagePath/large-screenshot1.png';
+  static const String largescreenshot2 = '$_imagePath/large-screenshot2.png';
+  static const String largescreenshot3 = '$_imagePath/large-screenshot3.png';
+  static String getImage(String imagename) => '$_imagePath/$imagename.png';
 
 }
 
@@ -32,6 +38,11 @@ class SvgAssets {
   static const String user  = '$_svgPath/user.svg';
   static const String google  = '$_svgPath/google.svg';
   static const String visibilityOff = '$_svgPath/visibility_off.svg';
+  static const String vector  = '$_svgPath/Vector.svg';
+  static const String iconsback  = '$_svgPath/iconsback.svg';
+  static const String heart  = '$_svgPath/heart.svg';
+  static const String hour  = '$_svgPath/hour.svg';
+  static const String star  = '$_svgPath/star.svg';
 }
 
 

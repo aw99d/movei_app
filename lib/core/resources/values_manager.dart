@@ -12,6 +12,7 @@ class Insets {
 class Sizes {
   static const double s1 = 1;
   static const double s2 = 2;
+  static const double s6 = 6;
   static const double s8 = 8.0;
   static const double s10 = 10.0;
   static const double s12 = 12.0;
@@ -32,5 +33,7 @@ class Sizes {
   static const double s300 = 300.0;
   static const double s350 = 350.0;
   static const double s430 = 430.0;
+  static const double s470 = 470.0;
   static const double s600 = 600.0;
+  static const double s800 = 800.0;
 }
