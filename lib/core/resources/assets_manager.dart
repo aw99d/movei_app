@@ -23,6 +23,7 @@ class ImageAssets {
   static const String largescreenshot1 = '$_imagePath/large-screenshot1.png';
   static const String largescreenshot2 = '$_imagePath/large-screenshot2.png';
   static const String largescreenshot3 = '$_imagePath/large-screenshot3.png';
+  static const String search = '$_imagePath/search_image.png';
   static String getImage(String imagename) => '$_imagePath/$imagename.png';
 
 }
@@ -43,6 +44,7 @@ class SvgAssets {
   static const String heart  = '$_svgPath/heart.svg';
   static const String hour  = '$_svgPath/hour.svg';
   static const String star  = '$_svgPath/star.svg';
+  static const String search = '$_svgPath/search.svg';
 }
 
 
