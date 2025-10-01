@@ -6,6 +6,7 @@ import 'package:movei_app/core/resources/color_manager.dart';
 import 'package:movei_app/core/resources/font_manager.dart';
 import 'package:movei_app/core/resources/styles_manager.dart';
 import 'package:movei_app/core/resources/values_manager.dart';
+import 'package:movei_app/core/routes/routes.dart';
 import 'package:movei_app/core/widgets/bottom_nav_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,11 +36,16 @@ class HomeScreen extends StatelessWidget {
                       items: [1, 2, 3, 4].map((i) {
                         return Builder(
                           builder: (BuildContext context) {
-                            return ClipRRect(
-                              borderRadius: BorderRadiusGeometry.circular(16.r),
-                              child: Image.asset(
-                                ImageAssets.home_1.replaceFirst('1', '$i'),
-                                fit: BoxFit.cover,
+                            return  GestureDetector(
+                              onTap: () {
+                                Navigator.of(context ,  rootNavigator: true).pushNamed(Routes.moviesDetails);
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadiusGeometry.circular(16.r),
+                                child: Image.asset(
+                                  ImageAssets.home_1.replaceFirst('1', '$i'),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             );
                           },
@@ -93,9 +99,8 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(
                           height: 200.h,
                           child: ListView.separated(
-                            scrollDirection:
-                                Axis.horizontal, // عشان الصور تكون بالعرض
-                            itemCount: 4, // عدد الصور
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 4,
                             itemBuilder: (_, index) {
                               return Image.asset(
                                 ImageAssets.home_1.replaceFirst(
@@ -107,8 +112,7 @@ class HomeScreen extends StatelessWidget {
                                 fit: BoxFit.cover,
                               );
                             },
-                            separatorBuilder: (_, __) =>
-                                SizedBox(width: 12.w), // مسافة بين الصور
+                            separatorBuilder: (_, __) => SizedBox(width: 12.w),
                           ),
                         ),
                       ],

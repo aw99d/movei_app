@@ -6,5 +6,6 @@ class Routes {
   static const String search = '/search';
   static const String browser= '/browser';
   static const String profile= '/profile';
+  static const String moviesDetails = '/movies-details';
 
 }

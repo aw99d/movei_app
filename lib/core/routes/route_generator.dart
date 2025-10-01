@@ -6,6 +6,7 @@ import 'package:movei_app/features/auth/presentation/screens/register_screen.dar
 import 'package:movei_app/features/auth/presentation/screens/reset_password_screen.dart';
 import 'package:movei_app/features/browser/browser_screen.dart';
 import 'package:movei_app/features/home/home_screen.dart';
+import 'package:movei_app/features/movies/presentation/screen/movies_details_screen.dart';
 import 'package:movei_app/features/search/search_screen.dart';
 
 class RouteGenerator {
@@ -15,14 +16,16 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => RegisterScreen());
       case Routes.login:
         return MaterialPageRoute(builder: (_) => LoginScreen());
-        case Routes.resetPassword:
+      case Routes.resetPassword:
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
-         case Routes.home:
-        return MaterialPageRoute(builder: (_) =>BottomNavBar());
-           case Routes.search:
+      case Routes.home:
+        return MaterialPageRoute(builder: (_) => BottomNavBar());
+      case Routes.search:
         return MaterialPageRoute(builder: (_) => SearchScreen());
-              case Routes.browser:
+      case Routes.browser:
         return MaterialPageRoute(builder: (_) => BrowserScreen());
+      case Routes.moviesDetails:
+        return MaterialPageRoute(builder: (_) => MoviesDetailsScreen());
 
       default:
         return _undefinedRoute();
