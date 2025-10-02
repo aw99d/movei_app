@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movei_app/core/resources/color_manager.dart';
-import 'package:movei_app/features/browser/browser_screen.dart';
+import 'package:movei_app/features/browser/presentation/screen/browser_screen.dart';
 import 'package:movei_app/features/home/home_screen.dart';
 import 'package:movei_app/features/profile/presentation/screen/profile_screen.dart';
 import 'package:movei_app/features/search/search_screen.dart';
