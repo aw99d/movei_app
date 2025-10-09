@@ -5,8 +5,9 @@ import 'package:movei_app/core/resources/styles_manager.dart';
 
 class ScreenAppBar extends StatelessWidget  implements PreferredSizeWidget{
   String? title;
+    List<Widget>? actions;
 
-  ScreenAppBar({this.title});
+  ScreenAppBar({this.title , this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class ScreenAppBar extends StatelessWidget  implements PreferredSizeWidget{
   ),
       centerTitle: true,
       title: Text(title ?? '', style: getMediumStyle(color: ColorManager.yellow , fontSize: 16.sp)),
+      actions: actions ?? [],
     );
   }
 

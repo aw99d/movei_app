@@ -17,7 +17,7 @@ class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
     this.prefixIcon,
     this.textStyle,
-    this.isStadiumBorder = true,
+    this.isStadiumBorder = false,
     this.backgroundColor,
     this.radius,
     this.suffixIcon,
@@ -27,31 +27,35 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: isStadiumBorder
-            ? const StadiumBorder()
-            : RoundedRectangleBorder(borderRadius: BorderRadius.circular(17.r)),
-        backgroundColor: backgroundColor ?? ColorManager.backgroundColorButton,
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 14.h),
-      ),
-      onPressed: onTap,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          prefixIcon ?? const SizedBox(),
-          SizedBox(width: 24.w),
-          Text(
-            label,
-            style:
-                textStyle ??
-                getRegularStyle(
-                  color: ColorManager.black,
-                ).copyWith(fontSize: FontSize.s16),
-          ),
-          SizedBox(width: 27.w),
-          suffixIcon ?? const SizedBox(),
-        ],
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: isStadiumBorder
+              ? const StadiumBorder()
+              : RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+          backgroundColor: backgroundColor ?? ColorManager.backgroundColorButton,
+          padding: EdgeInsets.symmetric( vertical: 14.h),
+        ),
+        onPressed: onTap,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            prefixIcon ?? const SizedBox(),
+            SizedBox(width: 24.w),
+            Text(
+              label,
+              style:
+                  textStyle ??
+                  getRegularStyle(
+                    color: ColorManager.black,
+                  ).copyWith(fontSize: FontSize.s16),
+            ),
+            SizedBox(width: 27.w),
+            suffixIcon ?? const SizedBox(),
+          ],
+        ),
       ),
     );
   }

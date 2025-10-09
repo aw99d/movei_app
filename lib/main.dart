@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +13,15 @@ void main() async {
   Bloc.observer = AppBlocObserver();
   await configureDependencies();
   runApp(MobiesApp());
+import 'package:movei_app/core/widgets/bottom_nav_bar.dart';
+
+void main() {
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) => MobiesApp(), // صححت هنا
+    ),
+  );
 }
 
 
@@ -32,6 +42,15 @@ class MobiesApp extends StatelessWidget {
           initialRoute: Routes.login,
         ),
       
+    return ScreenUtilInit(
+      designSize: const Size(430, 932),
+      splitScreenMode: true,
+      minTextAdapt: true,
+      builder: (_,__) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+       
+       onGenerateRoute: RouteGenerator.getRoute,
+        initialRoute: Routes.login,
       ),
     );
   }
