@@ -10,7 +10,7 @@ class CustomElevatedButton extends StatelessWidget {
   final String label;
   final Color? backgroundColor;
   final double? radius;
-  final void Function() onTap;
+  final void Function()? onTap;
   final TextStyle? textStyle;
   final bool isStadiumBorder;
 
