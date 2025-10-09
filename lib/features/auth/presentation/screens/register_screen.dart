@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movei_app/core/resources/assets_manager.dart';
@@ -9,10 +10,14 @@ import 'package:movei_app/core/resources/font_manager.dart';
 import 'package:movei_app/core/resources/styles_manager.dart';
 import 'package:movei_app/core/resources/values_manager.dart';
 import 'package:movei_app/core/routes/routes.dart';
+import 'package:movei_app/core/utils/ui_utils.dart';
 import 'package:movei_app/core/utils/validator.dart';
 import 'package:movei_app/core/widgets/custom_elevated_button.dart';
 import 'package:movei_app/core/widgets/custom_text_field.dart';
 import 'package:movei_app/core/widgets/screen_app_bar.dart';
+import 'package:movei_app/features/auth/data/models/register_request.dart';
+import 'package:movei_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:movei_app/features/auth/presentation/cubit/auth_state.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -31,6 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController _phoneController = TextEditingController();
 
   TextEditingController _confirmPasswordController = TextEditingController();
+  int _selectedAvatarId = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +50,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               CarouselSlider(
                 items: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Image.asset(
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedAvatarId = i; // هنا تختار الصورة
+                      });
+                    },
+                    child: Container(
+                      child: Image.asset(
                         ImageAssets.avatar_1.replaceFirst('1', '$i'),
                         height: Sizes.s100.h,
                         fit: BoxFit.fitWidth,
-                      );
-                    },
+                      ),
+                    ),
                   );
                 }).toList(),
                 options: CarouselOptions(
@@ -61,6 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   viewportFraction: 0.37,
                 ),
               ),
+
               Form(
                 key: _formKey,
                 child: Column(
@@ -85,7 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hint: 'Enter Your Email',
 
                       textInputType: TextInputType.emailAddress,
-                      validation: Validator.validateUsername,
+                      validation: Validator.validateEmail,
                       controller: _emailController,
                       prefixIcon: SvgPicture.asset(
                         SvgAssets.email,
@@ -138,7 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       backgroundColor: ColorManager.primary,
                       hint: 'Enter Your Phone',
 
-                      textInputType: TextInputType.emailAddress,
+                      textInputType: TextInputType.phone,
                       validation: Validator.validateUsername,
                       controller: _phoneController,
                       prefixIcon: SvgPicture.asset(
@@ -149,7 +161,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     SizedBox(height: Sizes.s20.h),
-                    CustomElevatedButton(label: 'Register', onTap: () {}),
+                    BlocListener<AuthCubit ,AuthState >(
+                      listener: (context, state){
+                        if(state is RegisterLoding){
+                          UIUtils.showLoading(context);
+                        }else if(state is RegisterSuccess){
+                          UIUtils.hideLoading(context);
+                          Navigator.of(context).pushReplacementNamed(Routes.home);
+                        }else if(state is RegisterError ){
+                          UIUtils.hideLoading(context);
+                          UIUtils.showMessage(state.message);
+                        }
+                      },
+                      child: CustomElevatedButton(
+                        label: 'Register',
+                        onTap: () {
+                         context.read<AuthCubit>().register(
+                            RegisterRequest(
+                              name: _nameController.text,
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                              phone: _phoneController.text,
+                              avaterId: _selectedAvatarId
+                                 
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                     SizedBox(height: Sizes.s18.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -196,7 +235,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _emailController.dispose();
     _phoneController.dispose();
     _passwordController.dispose();
-     _confirmPasswordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movei_app/core/resources/assets_manager.dart';
@@ -8,9 +9,13 @@ import 'package:movei_app/core/resources/font_manager.dart';
 import 'package:movei_app/core/resources/styles_manager.dart';
 import 'package:movei_app/core/resources/values_manager.dart';
 import 'package:movei_app/core/routes/routes.dart';
+import 'package:movei_app/core/utils/ui_utils.dart';
 import 'package:movei_app/core/utils/validator.dart';
 import 'package:movei_app/core/widgets/custom_elevated_button.dart';
 import 'package:movei_app/core/widgets/custom_text_field.dart';
+import 'package:movei_app/features/auth/data/models/login_request.dart';
+import 'package:movei_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:movei_app/features/auth/presentation/cubit/auth_state.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -86,8 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.of(context)
-                                  .pushNamed(Routes.resetPassword);
+                              Navigator.of(
+                                context,
+                              ).pushNamed(Routes.resetPassword);
                             },
                         ),
                       ),
@@ -95,7 +101,30 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: Sizes.s20.h),
 
-                  CustomElevatedButton(label: 'login', onTap: () {}),
+                  BlocListener<AuthCubit, AuthState>(
+                    listener: (context, state) {
+                      if (state is LoginLoding) {
+                        UIUtils.showLoading(context);
+                      } else if (state is LoginSuccess) {
+                        UIUtils.hideLoading(context);
+                        Navigator.of(context).pushReplacementNamed(Routes.resetPassword);
+                      } else if (state is LoginError) {
+                        UIUtils.hideLoading(context);
+                        UIUtils.showMessage(state.message);
+                      }
+                    },
+                    child: CustomElevatedButton(
+                      label: 'login',
+                      onTap: () {
+                        context.read<AuthCubit>().login(
+                          LoginRequest(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                   SizedBox(height: Sizes.s18.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -116,8 +145,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                              
-                                  Navigator.of(context).pushNamed(Routes.register);
+                                  Navigator.of(
+                                    context,
+                                  ).pushNamed(Routes.register);
                                 },
                             ),
                           ],
@@ -161,10 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomElevatedButton(
                     prefixIcon: SvgPicture.asset(SvgAssets.google),
                     label: 'Login With Google',
-                    onTap: () {
-                      
-                          
-                    },
+                    onTap: () {},
                   ),
                 ],
               ),
@@ -175,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-    @override
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
